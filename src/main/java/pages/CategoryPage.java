@@ -5,13 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class TShirtsPage {
+public class CategoryPage {
     WebDriver driver;
     Actions action;
     WebElement productMainElement;
     WebElement moreButtonElement;
 
-    public TShirtsPage(WebDriver driver, Actions action){
+    public CategoryPage(WebDriver driver, Actions action){
         this.driver = driver;
         this.action = action;
     }
