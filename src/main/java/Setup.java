@@ -2,10 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.MainLayout;
-import pages.CategoryPage;
-import pages.OrderPage;
-import pages.ProductPage;
+import pages.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +15,7 @@ public class Setup {
     CategoryPage objectCategoryPage;
     ProductPage objectProductPage;
     OrderPage objectOrderPage;
+    RegistrationPage objectRegistrationPage;
     WebDriverWait wait;
 
     public Setup (String mainURL){
@@ -33,6 +31,7 @@ public class Setup {
         objectCategoryPage = new CategoryPage(driver, action);
         objectProductPage = new ProductPage(driver, action, wait);
         objectOrderPage = new OrderPage(driver);
+        objectRegistrationPage = new RegistrationPage(driver);
     }
 
     public void move_to_women_menu_and_select_tShirts() {
@@ -101,5 +100,19 @@ public class Setup {
         objectOrderPage.input_value_in_email_address_field("gvazava911@gmail.com");
         objectOrderPage.find_create_an_account_button();
         objectOrderPage.click_create_account_button();
+    }
+
+    public void fill_registration_form(){
+        objectRegistrationPage.find_gender_input_and_select(1);
+        objectRegistrationPage.find_first_name_field_and_input("oto");
+        objectRegistrationPage.find_last_name_field_and_input("gvazava");
+        objectRegistrationPage.find_password_field_and_input("Paroli123");
+        objectRegistrationPage.find_date_of_birth_fields_and_input(29, 7, 2000);
+        objectRegistrationPage.find_address_field_and_input("Vadja Pshavela");
+        objectRegistrationPage.find_city_field_and_input("Tbilisi");
+        objectRegistrationPage.find_state_field_and_input(10);
+        objectRegistrationPage.find_zip_code_field_and_input("01000");
+        objectRegistrationPage.find_phone_field_and_input("599000000");
+        objectRegistrationPage.find_register_button_and_click();
     }
 }

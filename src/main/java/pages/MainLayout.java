@@ -68,11 +68,12 @@ public class MainLayout {
     }
 
     public void find_checkout_element(){
+       // this.wElement = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("button_order_cart")));
         this.checkoutElement = driver.findElement(By.id("button_order_cart"));
     }
 
     public void click_checkout_element(){
-        this.wElement = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("button_order_cart")));
+      //  this.wElement = this.wait.until(ExpectedConditions.elementToBeClickable(By.id("button_order_cart")));
         this.checkoutElement.click();
     }
 }

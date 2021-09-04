@@ -17,5 +17,6 @@ public class Run {
         setup.check_all_items_is_in_cart();
         setup.proceed_to_checkout();
         setup.start_proceed_to_create_account();
+        setup.fill_registration_form();
     }
 }
