@@ -1,0 +1,23 @@
+-Create maven project in Intellij Idea
+-Use Selenium with Java and Page Object Model design pattern
+-Write a test that does the following:
+    - Open the chrome browser
+    - Navigate to the http://automationpractice.com/index.php
+    - Move to 'Women' and select 'T-shirts'
+    - Click on the button 'More', which is visible on mouse hover on the returned card image
+    - In the opened page move to the all small images and check that big image changes
+    - Add two M size to the cart and click on 'Continue Shopping' button
+    - Move to the main page and select 'Casual Dresses' from the 'Dresses'
+    - Move to the returned element and Add to cart and click on 'Continue Shopping' button
+    - Move to the Cart and Check out
+    - Check by description that all items are added in cart 
+    - Click on 'Proceed to checkout' and sign up for a new account
+    - Click on 'Proceed to checkout' and leave Address data the default
+    - Click on 'Proceed to checkout' and try to click to 'Proceed to checkout' button in Shipping tab without accepting 'Terms of service'
+    - Catch error window and accept 'Terms of service'
+    - In 'Payment' Tab choose 'Pay by check'
+    - Check that total amount is correct and click on 'Confirm my order'
+    - Click on 'customer service department' link
+    - Choose heading and order reference, upload file, add message text and Send
+
+-Result of the task - GIT REPOSITORY LINK
