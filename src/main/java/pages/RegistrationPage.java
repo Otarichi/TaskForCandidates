@@ -3,14 +3,26 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class RegistrationPage {
     WebDriver driver;
-    WebElement genderInput, firstName, lastName, password, dateDay, dateMonth, dateYear, address, city, state, zipCode,
+    WebElement genderInput, firstName, lastName, password, address, city, zipCode,
     phone;
+    Select dateMonth, dateDay, dateYear, state;
+    Actions action;
+    WebDriverWait wait;
 
-    public RegistrationPage(WebDriver driver){
+    public RegistrationPage(WebDriver driver, WebDriverWait wait, Actions action){
         this.driver = driver;
+        this.wait = wait;
+        this.action = action;
+
     }
 
     public void find_gender_input_and_select(Integer gender){
@@ -35,20 +47,14 @@ public class RegistrationPage {
     }
 
     public void find_date_of_birth_fields_and_input(int day, int month, int year) {
-        this.dateDay = driver.findElement(By.id("days"));
-        this.dateDay.click();
-        this.dateDay.findElement(By.xpath("//option[@value = " + String.valueOf(day) + "]")).click();
-        this.dateDay.click();
+        this.dateDay = new Select(driver.findElement(By.id("days")));
+        this.dateDay.selectByValue(String.valueOf(day));
 
-        this.dateMonth = this.driver.findElement(By.id("months"));
-        this.dateMonth.click();
-        this.dateMonth.findElement(By.xpath("//option[@value = " + String.valueOf(month) + "]")).click();
-        this.dateMonth.click();
+        this.dateMonth = new Select(this.driver.findElement(By.id("months")));
+        this.dateMonth.selectByValue(String.valueOf(month));
 
-        this.dateYear = this.driver.findElement(By.id("years"));
-        this.dateYear.click();
-        this.dateYear.findElement(By.xpath("//option[@value = " + String.valueOf(year) + "]")).click();
-        this.dateYear.click();
+        this.dateYear = new Select(this.driver.findElement(By.id("years")));
+        this.dateYear.selectByValue(String.valueOf(year));
     }
 
     public void find_address_field_and_input(String address){
@@ -62,10 +68,8 @@ public class RegistrationPage {
     }
 
     public void find_state_field_and_input(int state){
-        this.state = this.driver.findElement(By.id("id_state"));
-        this.state.click();
-        this.state.findElement(By.xpath("//option[@value = " + String.valueOf(state) + "]")).click();
-        this.state.click();
+        this.state = new Select(this.driver.findElement(By.id("id_state")));
+        this.state.selectByValue(String.valueOf(state));
     }
 
     public void find_zip_code_field_and_input(String zipCode){

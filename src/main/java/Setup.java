@@ -31,7 +31,7 @@ public class Setup {
         objectCategoryPage = new CategoryPage(driver, action);
         objectProductPage = new ProductPage(driver, action, wait);
         objectOrderPage = new OrderPage(driver);
-        objectRegistrationPage = new RegistrationPage(driver);
+        objectRegistrationPage = new RegistrationPage(driver, wait, action);
     }
 
     public void move_to_women_menu_and_select_tShirts() {
@@ -97,7 +97,7 @@ public class Setup {
 
     public void start_proceed_to_create_account(){
         objectOrderPage.find_email_address_field();
-        objectOrderPage.input_value_in_email_address_field("gvazava911@gmail.com");
+        objectOrderPage.input_value_in_email_address_field("teststestt@gmail.com");
         objectOrderPage.find_create_an_account_button();
         objectOrderPage.click_create_account_button();
     }
