@@ -18,6 +18,5 @@ public class Run {
         setup.proceed_to_checkout();
         setup.start_proceed_to_create_account();
         setup.fill_registration_form();
-        // setup.proceed_to_checkout();
     }
 }

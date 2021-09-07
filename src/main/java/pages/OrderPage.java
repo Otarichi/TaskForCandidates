@@ -1,11 +1,14 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.lang.model.element.Element;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class OrderPage {
     WebDriver driver;
@@ -27,7 +30,17 @@ public class OrderPage {
     }
 
     public void find_proceed_to_checkout_element(){
-        this.procCheckout = this.driver.findElement(By.className("standard-checkout"));
+        try {
+            this.procCheckout = this.driver.findElement(By.className("standard-checkout"));
+            System.out.println("1");
+        } catch (NoSuchElementException e) {
+            this.procCheckout = this.driver.findElement(By.xpath("//button[@name = 'processAddress']"));
+            System.out.println("2");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("3");
+        }
+
     }
 
     public void click_proceed_to_checkout(){

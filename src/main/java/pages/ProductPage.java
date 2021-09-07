@@ -5,13 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage {
     WebDriver driver;
     Actions action;
     WebDriverWait wait;
-    WebElement bigPic, thumb1, thumb2, thumb3, thumb4, sizeInput, quantityPlus, addToCart, continueShopping, wElement;
+    Select sizeInput;
+    WebElement bigPic, thumb1, thumb2, thumb3, thumb4, quantityPlus, addToCart, continueShopping, layerCart;
 
     public ProductPage(WebDriver driver, Actions action, WebDriverWait wait){
         this.driver = driver;
@@ -52,14 +54,11 @@ public class ProductPage {
     }
 
     public void find_size_input_element(){
-        this.sizeInput = driver.findElement(By.name("group_1"));
+        this.sizeInput = new Select(driver.findElement(By.name("group_1")));
     }
 
-    public void click_size_input_and_select_m(){
-        this.sizeInput.click();
-//        this.wElement = this.wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//option[@title = 'M']")));
-        sizeInput.findElement(By.xpath("//option[@title = 'M']")).click();
-        this.sizeInput.click();
+    public void select_m_size(String size_value){
+        this.sizeInput.selectByValue(String.valueOf(size_value));
     }
 
     public void find_quantity_plus_element(){
@@ -79,7 +78,11 @@ public class ProductPage {
     }
 
     public void wait_until_cart_layer_display(){
-        this.wElement = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("layer_cart")));
+        this.layerCart = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("layer_cart")));
+    }
+
+    public void wait_until_cart_layer_display_none(){
+        this.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("layer_cart")));
     }
 
     public void find_continue_shopping_element(){

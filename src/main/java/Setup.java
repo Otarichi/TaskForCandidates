@@ -55,7 +55,7 @@ public class Setup {
 
     public void change_product_size(){
         objectProductPage.find_size_input_element();
-        objectProductPage.click_size_input_and_select_m();
+        objectProductPage.select_m_size("2");
     }
 
     public void change_product_quantity(){
@@ -69,6 +69,7 @@ public class Setup {
         objectProductPage.wait_until_cart_layer_display();
         objectProductPage.find_continue_shopping_element();
         objectProductPage.click_continue_shopping_element();
+        objectProductPage.wait_until_cart_layer_display_none();
     }
 
     public void navigate_to_casual_dresses_category(){
@@ -97,7 +98,7 @@ public class Setup {
 
     public void start_proceed_to_create_account(){
         objectOrderPage.find_email_address_field();
-        objectOrderPage.input_value_in_email_address_field("teststestt@gmail.com");
+        objectOrderPage.input_value_in_email_address_field("adsateststestt@gmail.com");
         objectOrderPage.find_create_an_account_button();
         objectOrderPage.click_create_account_button();
     }
