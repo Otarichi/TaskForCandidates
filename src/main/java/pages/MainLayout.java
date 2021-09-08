@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainLayout {
@@ -11,7 +12,8 @@ public class MainLayout {
     WebDriver driver;
     Actions action;
     WebDriverWait wait;
-    WebElement womenCategory, tShirtsCategory, dressesCategory, casualDressesCategory, cartElement, checkoutElement;
+    WebElement womenCategory, tShirtsCategory, dressesCategory, casualDressesCategory, cartElement, checkoutElement,
+            continueShopping, layerCart;
 
     public MainLayout (WebDriver driver, Actions action, WebDriverWait wait) {
         this.action = action;
@@ -69,5 +71,21 @@ public class MainLayout {
 
     public void click_checkout_element(){
         this.checkoutElement.click();
+    }
+
+    public void wait_until_cart_layer_display(){
+        this.layerCart = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("layer_cart")));
+    }
+
+    public void wait_until_cart_layer_display_none(){
+        this.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("layer_cart")));
+    }
+
+    public void find_continue_shopping_element(){
+        this.continueShopping = driver.findElement(By.xpath("//span[@title = 'Continue shopping']"));
+    }
+
+    public void click_continue_shopping_element(){
+        this.continueShopping.click();
     }
 }

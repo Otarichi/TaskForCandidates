@@ -1,21 +1,18 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.lang.model.element.Element;
-import java.util.List;
-import java.util.NoSuchElementException;
-
 public class OrderPage {
+    WebDriverWait wait;
     WebDriver driver;
-    WebElement product1Title, product2Title, procCheckout, emailAddressField, accountCreateButton;
+    WebElement product1Title, product2Title, procCheckout, emailAddressField, accountCreateButton,
+            errorWindowCloseButton, agreementCheckbox, payByCheckButton, totalAmount, confirmOrder, customerService;
 
-    public OrderPage(WebDriver driver){
+    public OrderPage(WebDriver driver, WebDriverWait wait){
         this.driver = driver;
+        this.wait = wait;
     }
 
     public void find_products_description_titles_and_check(String ...productNames){
@@ -30,20 +27,11 @@ public class OrderPage {
     }
 
     public void find_proceed_to_checkout_element(){
-        try {
-            this.procCheckout = this.driver.findElement(By.className("standard-checkout"));
-            System.out.println("1");
-        } catch (NoSuchElementException e) {
-            this.procCheckout = this.driver.findElement(By.xpath("//button[@name = 'processAddress']"));
-            System.out.println("2");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("3");
-        }
-
+        this.procCheckout = this.driver.findElements(By.xpath("//*[text()[contains(., 'Proceed to checkout')]]")).get(1).findElement(By.xpath(".."));
     }
 
     public void click_proceed_to_checkout(){
+        wait.until(ExpectedConditions.visibilityOf(this.procCheckout));
         this.procCheckout.click();
     }
 
@@ -61,5 +49,59 @@ public class OrderPage {
 
     public void click_create_account_button(){
         this.accountCreateButton.click();
+    }
+
+    public void find_error_window_close_button(){
+        this.errorWindowCloseButton = this.driver.findElement(By.className("fancybox-close"));
+    }
+
+    public void click_error_window_close_button(){
+        this.errorWindowCloseButton.click();
+    }
+
+    public void find_agreement_checkbox(){
+        this.agreementCheckbox = this.driver.findElement(By.id("cgv"));
+    }
+
+    public void click_agreement_checkbox(){
+        this.agreementCheckbox.click();
+    }
+
+    public void find_pay_by_check_button(){
+        this.payByCheckButton = this.driver.findElement(By.className("cheque"));
+    }
+
+    public void click_pay_by_check_button(){
+        this.payByCheckButton.click();
+    }
+
+    public void find_total_amount_element(){
+        this.totalAmount = this.driver.findElement(By.id("amount"));
+    }
+
+    public void check_total_amount(Double amountArg){
+        Double amount = Double.parseDouble(this.totalAmount.getAttribute("innerHTML").strip().substring(1));
+        System.out.println(amount);
+        if (amount.equals(amountArg)){
+            System.out.println("amount is correct");
+        } else {
+            System.out.println("amount is not correct");
+        }
+    }
+
+    public void find_confirm_order(){
+        this.confirmOrder = this.driver.findElement(By.xpath("//*[@id=\"cart_navigation\"]/button"));
+    }
+
+    public void click_confirm_order(){
+        this.confirmOrder.click();
+    }
+
+    public void find_contact_customer_service_element(){
+        this.customerService = this.driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/a"));
+    }
+
+    public void click_contact_customer_service_element(){
+        this.customerService.click();
     }
 }

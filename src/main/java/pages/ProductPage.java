@@ -13,7 +13,7 @@ public class ProductPage {
     Actions action;
     WebDriverWait wait;
     Select sizeInput;
-    WebElement bigPic, thumb1, thumb2, thumb3, thumb4, quantityPlus, addToCart, continueShopping, layerCart;
+    WebElement bigPic, thumb1, thumb2, thumb3, thumb4, quantityPlus, addToCart;
 
     public ProductPage(WebDriver driver, Actions action, WebDriverWait wait){
         this.driver = driver;
@@ -75,21 +75,5 @@ public class ProductPage {
 
     public void click_add_to_cart_element(){
         this.addToCart.click();
-    }
-
-    public void wait_until_cart_layer_display(){
-        this.layerCart = this.wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("layer_cart")));
-    }
-
-    public void wait_until_cart_layer_display_none(){
-        this.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("layer_cart")));
-    }
-
-    public void find_continue_shopping_element(){
-        this.continueShopping = driver.findElement(By.xpath("//span[@title = 'Continue shopping']"));
-    }
-
-    public void click_continue_shopping_element(){
-        this.continueShopping.click();
     }
 }

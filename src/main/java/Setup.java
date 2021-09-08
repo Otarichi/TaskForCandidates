@@ -4,6 +4,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Setup {
@@ -17,6 +18,7 @@ public class Setup {
     OrderPage objectOrderPage;
     RegistrationPage objectRegistrationPage;
     WebDriverWait wait;
+    CustomerServicePage objectCustomerServicePage;
 
     public Setup (String mainURL){
         this.mainURL = mainURL;
@@ -30,8 +32,9 @@ public class Setup {
         objectMainLayout = new MainLayout(driver, action, wait);
         objectCategoryPage = new CategoryPage(driver, action);
         objectProductPage = new ProductPage(driver, action, wait);
-        objectOrderPage = new OrderPage(driver);
+        objectOrderPage = new OrderPage(driver, wait);
         objectRegistrationPage = new RegistrationPage(driver, wait, action);
+        objectCustomerServicePage = new CustomerServicePage(driver);
     }
 
     public void move_to_women_menu_and_select_tShirts() {
@@ -63,14 +66,17 @@ public class Setup {
         objectProductPage.click_quantity_plus_element();
     }
 
-    public void add_product_to_cart_and_continue(){
+    public void add_product_to_cart_from_product_page(){
         objectProductPage.find_add_to_cart_element();
         objectProductPage.click_add_to_cart_element();
-        objectProductPage.wait_until_cart_layer_display();
-        objectProductPage.find_continue_shopping_element();
-        objectProductPage.click_continue_shopping_element();
-        objectProductPage.wait_until_cart_layer_display_none();
     }
+
+    public void open_cart_layer_and_continue(){
+        objectMainLayout.wait_until_cart_layer_display();
+        objectMainLayout.find_continue_shopping_element();
+        objectMainLayout.click_continue_shopping_element();
+        objectMainLayout.wait_until_cart_layer_display_none();
+    };
 
     public void navigate_to_casual_dresses_category(){
         objectMainLayout.go_to_main_page();
@@ -78,6 +84,13 @@ public class Setup {
         objectMainLayout.hover_dresses_category();
         objectMainLayout.find_casual_dresses_sub_category();
         objectMainLayout.click_casual_dresses_category();
+    }
+
+    public void add_product_to_cart_from_category_page(){
+        objectCategoryPage.find_product_main_element();
+        objectCategoryPage.hover_product_main_element();
+        objectCategoryPage.find_add_to_cart_button();
+        objectCategoryPage.click_add_to_cart_button();
     }
 
     public void move_to_cart_and_checkout(){
@@ -98,7 +111,7 @@ public class Setup {
 
     public void start_proceed_to_create_account(){
         objectOrderPage.find_email_address_field();
-        objectOrderPage.input_value_in_email_address_field("adsateststestt@gmail.com");
+        objectOrderPage.input_value_in_email_address_field("mbjdss@gmail.com");
         objectOrderPage.find_create_an_account_button();
         objectOrderPage.click_create_account_button();
     }
@@ -115,5 +128,40 @@ public class Setup {
         objectRegistrationPage.find_zip_code_field_and_input("01000");
         objectRegistrationPage.find_phone_field_and_input("599000000");
         objectRegistrationPage.find_register_button_and_click();
+    }
+
+    public void close_error_window_and_agree(){
+        objectOrderPage.find_error_window_close_button();
+        objectOrderPage.click_error_window_close_button();
+        objectOrderPage.find_agreement_checkbox();
+        objectOrderPage.click_agreement_checkbox();
+    }
+
+    public void select_pay_by_check_option(){
+        objectOrderPage.find_pay_by_check_button();
+        objectOrderPage.click_pay_by_check_button();
+    }
+
+    public void find_and_check_total_amount(){
+        objectOrderPage.find_total_amount_element();
+        objectOrderPage.check_total_amount(61.02);
+    }
+
+    public void confirm_order(){
+        objectOrderPage.find_confirm_order();
+        objectOrderPage.click_confirm_order();
+    }
+
+    public void navigate_to_customer_service(){
+        objectOrderPage.find_contact_customer_service_element();
+        objectOrderPage.click_contact_customer_service_element();
+    }
+
+    public void send_message_to_customer_service(){
+        objectCustomerServicePage.find_subject_heading_and_select(1);
+        objectCustomerServicePage.find_order_reference_and_select(1);
+        objectCustomerServicePage.find_choose_file_element_and_choose();
+        objectCustomerServicePage.find_message_text_area_and_input("Web site tested successfully");
+        objectCustomerServicePage.find_send_button_and_click();
     }
 }

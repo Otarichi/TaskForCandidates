@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Random;
+
 public class RegistrationPage {
     WebDriver driver;
     WebElement genderInput, firstName, lastName, password, address, city, zipCode,
@@ -19,7 +21,6 @@ public class RegistrationPage {
         this.driver = driver;
         this.wait = wait;
         this.action = action;
-
     }
 
     public void find_gender_input_and_select(Integer gender){
