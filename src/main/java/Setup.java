@@ -4,13 +4,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
-import java.util.Random;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class Setup {
     WebDriver driver;
     Actions action;
-    String driverPath = "C:\\Users\\Oto\\Downloads\\chromedriver_win32\\chromedriver.exe";
+    File chromeDriver = new File("src/chromedriver/chromedriver.exe");
     String mainURL;
     MainLayout objectMainLayout;
     CategoryPage objectCategoryPage;
@@ -22,7 +22,7 @@ public class Setup {
 
     public Setup (String mainURL){
         this.mainURL = mainURL;
-        System.setProperty("webdriver.chrome.driver", driverPath);
+        System.setProperty("webdriver.chrome.driver", chromeDriver.getAbsolutePath());
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();

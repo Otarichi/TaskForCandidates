@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -70,7 +69,7 @@ public class ProductPage {
     }
 
     public void find_add_to_cart_element(){
-        this.addToCart = driver.findElement(By.xpath("//p[@id = 'add_to_cart']/button"));
+        this.addToCart = driver.findElement(By.xpath("//*[@id = 'add_to_cart']/button"));
     }
 
     public void click_add_to_cart_element(){
